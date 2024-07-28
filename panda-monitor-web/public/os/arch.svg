@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.0"
+   width="512"
+   height="512"
+   id="svg2424"
+   sodipodi:docname="archlinux-logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <defs
+     id="defs2426" />
+  <path
+     d="m 255.78416,16.625 c -20.75212,50.872617 -33.2688,84.14929 -56.37357,133.50965 14.16612,15.01429 31.55436,32.49918 59.79281,52.24672 C 228.8443,189.89028 208.13567,177.34952 192.65979,164.33594 163.09008,226.0303 116.76286,313.91118 22.75,482.813 96.640951,440.15956 153.9199,413.86327 207.30113,403.82929 205.00892,393.9717 203.70571,383.3088 203.79422,372.1832 l 0.0877,-2.36688 c 1.17247,-47.33432 25.79869,-83.73442 54.97081,-81.26293 29.17213,2.47149 51.84731,42.87014 50.67485,90.20448 -0.22052,8.90683 -1.22529,17.47509 -2.98088,25.42207 52.80167,10.32771 109.46814,36.55668 182.35932,78.63306 -14.37272,-26.45802 -27.20161,-50.30799 -39.45274,-73.02268 -19.29751,-14.95507 -39.42577,-34.41915 -80.48358,-55.49022 28.22078,7.33207 48.4265,15.79133 64.17645,25.24674 C 308.58552,147.66443 298.49878,116.85204 255.78416,16.625 Z"
+     id="path2518"
+     style="fill:#1793d1;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.80536" />
+</svg>

@@ -1,0 +1,10 @@
+export cn.zzwtsy.panda.model.ServerGroup
+
+input ServerGroupInput {
+    name
+}
+
+ServerGroupView {
+    id
+    name
+}

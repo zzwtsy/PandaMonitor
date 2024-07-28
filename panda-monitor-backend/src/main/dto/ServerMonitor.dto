@@ -1,0 +1,43 @@
+export cn.zzwtsy.panda.model.ServerMonitor
+
+input UpdateServerMonitorInput {
+    id
+    serverName?
+    visitorHiding?
+    sortId?
+    serverGroup {
+        id
+        name?
+    }
+}
+
+input AddServerMonitorInput {
+    serverName
+    visitorHiding
+    sortId
+    serverGroupId
+}
+
+ListServerMonitorView {
+    id
+    serverName
+    visitorHiding
+    sortId
+    serverGroup {
+        id
+        name
+    }
+    serverHosts {
+        id
+        ipv4
+        ipv6
+        agentVersion
+    }
+}
+
+ServerMonitorView {
+    id
+    sortId
+    serverName
+    serverGroupId
+}

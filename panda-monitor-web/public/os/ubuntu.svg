@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   width="512"
+   height="512"
+   data-name="Layer 1"
+   version="1.1"
+   sodipodi:docname="ubuntu.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">.cls-3{fill:#fff}</style>
+  </defs>
+  <g
+     id="g19"
+     transform="matrix(2.03322,0,0,2.03322,-2.29,-285.171)">
+    <circle
+       id="circle16"
+       cx="58.09"
+       cy="255.92"
+       r="26.299999"
+       class="cls-3"
+       style="fill:#e95420;fill-opacity:1" />
+    <circle
+       id="circle17"
+       cx="167.63"
+       cy="198.25"
+       r="26.299999"
+       class="cls-3"
+       style="fill:#e95420;fill-opacity:1" />
+    <path
+       id="path17"
+       d="M 117.41,323.62 C 98.46,319.56 82.63,307.46 73.73,290.3 a 37.859,37.859 0 0 1 -22.49,2.76 c 10.77,26.45 33.61,45.66 61.65,51.67 a 86.423,86.423 0 0 0 18.68,1.92 37.647,37.647 0 0 1 -7.7,-21.99 63.26,63.26 0 0 1 -6.45,-1.05 z"
+       class="cls-3"
+       style="fill:#e95420;fill-opacity:1" />
+    <circle
+       id="circle18"
+       cx="161.71001"
+       cy="323.76001"
+       r="26.299999"
+       class="cls-3"
+       style="fill:#e95420;fill-opacity:1" />
+    <path
+       id="path18"
+       d="m 198.31,314.1 a 86.185,86.185 0 0 0 16.71,-35.45 c 4.84,-22.59 0.32,-46.29 -12.4,-65.51 a 37.888,37.888 0 0 1 -14.79,17.32 64.349,64.349 0 0 1 6.08,43.67 64.263,64.263 0 0 1 -8.18,20.38 37.756,37.756 0 0 1 12.59,19.6 z"
+       class="cls-3"
+       style="fill:#e95420;fill-opacity:1" />
+    <path
+       id="path19"
+       d="m 56.06,218.2 c 0.67,-0.04 1.34,-0.05 2,-0.05 2.66,0 5.31,0.28 7.94,0.85 4.29,0.92 8.32,2.54 12.01,4.84 11.84,-17.03 30.95,-27.25 51.65,-27.63 0.11,-1.99 0.38,-3.97 0.79,-5.92 1.21,-5.63 3.67,-10.9 7.19,-15.41 -33.08,-2.62 -65.22,14.45 -81.59,43.33 z"
+       class="cls-3"
+       style="fill:#e95420;fill-opacity:1" />
+  </g>
+</svg>

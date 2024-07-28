@@ -1,0 +1,18 @@
+export cn.zzwtsy.panda.model.ServerHost
+
+ServerHostSocketView {
+    id
+    serverMonitorId
+    arch
+    osName
+    osVersion
+    distributionId
+    kernelVersion
+    cpu
+    cpuCores
+    memTotal
+    diskTotal
+    swapTotal
+    bootTime
+    countryCode
+}

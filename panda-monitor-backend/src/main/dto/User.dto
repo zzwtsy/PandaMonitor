@@ -1,0 +1,17 @@
+export cn.zzwtsy.panda.model.User
+
+UserView {
+    id
+    name
+}
+
+input UpdateUserInput {
+    id
+    name
+    password
+}
+
+input AddUserInput {
+    name
+    password
+}

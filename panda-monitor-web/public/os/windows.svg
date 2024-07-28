@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="512"
+   height="512"
+   fill="#0078d6"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="Windows_10_Logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <path
+     d="M 12.35,81.77763 211.62388,54.5032 V 246.53744 H 12.35 M 235.62606,50.60685 499.65,12.2 V 244.86758 H 235.62606 M 12.35,266.79845 H 211.62388 V 459.38932 L 12.35,431.55826 M 235.62606,269.3589 H 499.65 V 499.8 L 235.62606,462.50639"
+     id="path1"
+     sodipodi:nodetypes="cccccccccccccccc"
+     style="stroke-width:5.57404" />
+</svg>
