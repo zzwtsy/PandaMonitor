@@ -4,7 +4,7 @@ import ToggleTheme from '@/components/ToggleTheme.vue'
 
 <template>
   <header
-    class="top-0 left-0 right-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+    class="sticky top-0 left-0 right-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
   >
     <nav class="container flex h-14 items-center justify-center">
       <h2
