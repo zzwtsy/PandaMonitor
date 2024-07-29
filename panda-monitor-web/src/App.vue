@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import DashboardView from '@/views/DashboardView.vue'
 import Header from '@/components/Header.vue'
-import { useServerGroupStore } from '@/stores/server-group'
-import ServerGroupBar from '@/components/ServerGroupBar.vue'
-
-const store = useServerGroupStore()
+import { Toaster } from '@/components/ui/sonner'
 </script>
 
 <template>
   <Header />
-  <ServerGroupBar class="mx-auto mt-5 text-center" />
-  <main class="md:container px-1 py-8">
+  <main class="md:container px-1 mt-2">
     <DashboardView />
   </main>
+  <Toaster close-button rich-colors position="top-right" style="margin-top: 2rem" />
 </template>
