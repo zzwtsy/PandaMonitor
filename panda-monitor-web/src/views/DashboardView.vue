@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { useWebSocket } from '@vueuse/core'
-import { ref, watch } from 'vue'
-import type { ServerMonitorDTO, WebSocketDTO } from '@/types'
 import { ServerStatusCard } from '@/components/server-status-card'
-import type { Result } from '@/__generated/model/static'
 import {
   Select,
   SelectContent,
@@ -12,47 +8,16 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { toast } from 'vue-sonner'
-import { WifiOffIcon, LoaderIcon } from 'lucide-vue-next'
+import { WifiOffIcon } from 'lucide-vue-next'
+import { useServerData } from '@/hooks/useServerData'
 
-const serverGroupName = ref('')
-const serverGroupList = ref<string[]>([])
-const serverData = ref<ServerMonitorDTO[]>()
-const { data } = useWebSocket<string>('ws://localhost:8080/api/ws', {
-  onConnected(ws) {
-    ws.send(`Authorization: Bearer ${localStorage.getItem('token')}`)
-    if (ws.readyState === WebSocket.OPEN) {
-      toast.success('连接服务器成功')
-    }
-  },
-  onError() {
-    toast.error(`连接服务器失败`)
-    serverData.value = []
-  }
-})
-
-watch(data, (data) => {
-  if (!data) return
-  const webSocketDTO: Result<WebSocketDTO[]> = JSON.parse(data)
-  if (!webSocketDTO || webSocketDTO.code !== 200 || !webSocketDTO.data) {
-    toast.error('连接服务器失败')
-    return
-  }
-  // 获取服务器分组
-  serverGroupList.value = webSocketDTO.data.map((item) => item.groupName) ?? []
-  // 默认选中第一个分组
-  serverGroupName.value = serverGroupList.value[0]
-  // 获取服务器数据
-  serverData.value =
-    webSocketDTO.data
-      .find((item) => item.groupName === serverGroupName.value)
-      ?.serverMonitor.sort((a, b) => a.sortId - b.sortId) ?? []
-})
+const { serverData, serverGroupList, serverGroupName } = useServerData()
 </script>
 
 <template>
+  <!-- 服务器分组 -->
   <Select
-    v-if="serverGroupList.length > 0"
+    v-if="!serverGroupList || serverGroupList.length > 0"
     :default-value="serverGroupName"
     @select="(value: string) => (serverGroupName = value)"
   >
@@ -74,15 +39,9 @@ watch(data, (data) => {
       :serverMonitor="serverMonitor"
     />
   </div>
+  <!-- 如果果没有服务器数据，则显示暂无可监控的服务器，并添加淡入淡出效果 -->
   <div
-    v-if="!serverData"
-    class="absolute top-1/2 left-1/2 translate-x-[-50%] flex flex-col items-center justify-center"
-  >
-    <LoaderIcon class="w-8 h-8 animate-spin" />
-    <h1 class="text-xl mt-3">正在连接服务器</h1>
-  </div>
-  <div
-    v-else-if="serverData.length === 0"
+    v-if="serverData.length === 0"
     class="absolute top-1/2 left-1/2 translate-x-[-50%] flex flex-col items-center justify-center"
   >
     <WifiOffIcon class="w-8 h-8" />
