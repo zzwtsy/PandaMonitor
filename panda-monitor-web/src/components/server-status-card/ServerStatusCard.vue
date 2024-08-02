@@ -15,27 +15,15 @@ import {
   ServerIcon
 } from 'lucide-vue-next'
 import ServerStatusProgress from './ServerStatusProgress.vue'
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import type { ServerMonitorDTO } from '@/types'
-import { calc } from 'a-calc'
-import { calcServerTime, calcUsage, cn, formatBytes } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import ServerStatusItem from '@/components/server-status-card/ServerStatusItem.vue'
+import { useServerMonitorState } from '@/hooks/useServerMonitorState'
 
 type Props = {
   serverMonitor: ServerMonitorDTO
-}
-
-type State = {
-  cpuUsage: number
-  memoryUsage: number
-  diskUsage: number
-  swapUsage: number
-  netInTransfer: string
-  netOutTransfer: string
-  netInSpeed: string
-  netOutSpeed: string
-  uptime: string
 }
 
 const props = defineProps<Props>()
@@ -43,44 +31,14 @@ const props = defineProps<Props>()
 const cardTitleRef = ref<HTMLTitleElement>()
 const cardTitleIsOverflowed = ref(false)
 
+// 监听标题是否溢出
 onMounted(() => {
   const element = cardTitleRef.value
   if (!element) return
   cardTitleIsOverflowed.value = element.scrollWidth > element.offsetWidth
 })
 
-const initializeState = (): State => ({
-  cpuUsage: 0,
-  memoryUsage: 0,
-  diskUsage: 0,
-  swapUsage: 0,
-  netInTransfer: '0',
-  netOutTransfer: '0',
-  netInSpeed: '0',
-  netOutSpeed: '0',
-  uptime: '0'
-})
-
-const state = computed(() => {
-  const serverState = props.serverMonitor.serverState
-  const serverHost = props.serverMonitor.serverHost
-  if (!serverState) {
-    return initializeState()
-  }
-  const cpu = serverState.cpuUsage ?? 0
-  const result: State = {
-    cpuUsage: calc('cpu | =0!n', { cpu }),
-    memoryUsage: calcUsage(serverHost?.memTotal ?? '0', serverState.memUsed ?? '0'),
-    diskUsage: calcUsage(serverHost?.diskTotal ?? '0', serverState.diskUsed ?? '0'),
-    swapUsage: calcUsage(serverHost?.swapTotal ?? '0', serverState.swapUsed ?? '0'),
-    netInTransfer: formatBytes(serverState.netInTransfer ?? '0'),
-    netOutTransfer: formatBytes(serverState.netOutTransfer ?? '0'),
-    netInSpeed: formatBytes(serverState.netInSpeed ?? '0'),
-    netOutSpeed: formatBytes(serverState.netOutSpeed ?? '0'),
-    uptime: calcServerTime(serverHost?.bootTime ?? 0)
-  }
-  return result
-})
+const state = useServerMonitorState(props.serverMonitor)
 </script>
 
 <template>
@@ -143,6 +101,7 @@ const state = computed(() => {
       <ServerStatusProgress title="交换" :progress="state.swapUsage">
         <ReplaceIcon class="w-4 h-4 mr-1.5" />
       </ServerStatusProgress>
+      <!-- 网络上下行速率 -->
       <ServerStatusItem title="网络">
         <template #icon>
           <ArrowUpDownIcon class="w-4 h-4 mr-1.5" />
@@ -158,6 +117,7 @@ const state = computed(() => {
           </div>
         </template>
       </ServerStatusItem>
+      <!-- 上下行总流量 -->
       <ServerStatusItem title="流量">
         <template #icon>
           <HardDriveUploadIcon class="w-4 h-4 mr-1.5" />
@@ -173,6 +133,7 @@ const state = computed(() => {
           </div>
         </template>
       </ServerStatusItem>
+      <!-- 1分钟、5分钟、15分钟负载 -->
       <ServerStatusItem title="负载">
         <template #icon>
           <ActivityIcon class="w-4 h-4 mr-1.5" />
@@ -185,6 +146,7 @@ const state = computed(() => {
           {{ props.serverMonitor.serverState?.load15 ?? 0 }}
         </template>
       </ServerStatusItem>
+      <!-- 运行时间 -->
       <ServerStatusItem title="在线">
         <template #icon>
           <ClockIcon class="w-4 h-4 mr-1.5" />
