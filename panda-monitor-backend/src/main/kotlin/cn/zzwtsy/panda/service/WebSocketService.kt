@@ -9,10 +9,7 @@ import cn.zzwtsy.panda.model.dto.ServerHostSocketView
 import cn.zzwtsy.panda.model.dto.ServerMonitorView
 import cn.zzwtsy.panda.model.dto.ServerStateSocketView
 import com.fasterxml.jackson.databind.ObjectMapper
-import jakarta.websocket.OnClose
-import jakarta.websocket.OnError
-import jakarta.websocket.OnOpen
-import jakarta.websocket.Session
+import jakarta.websocket.*
 import jakarta.websocket.server.ServerEndpoint
 import org.babyfish.jimmer.sql.kt.KSqlClient
 import org.babyfish.jimmer.sql.kt.ast.expression.desc
@@ -30,9 +27,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 class WebSocketService : ApplicationContextAware {
     private val log = LoggerFactory.getLogger(javaClass)
 
-    companion object {
-        lateinit var APPLICATION_CONTEXT: ApplicationContext
-    }
+    private lateinit var applicationContext: ApplicationContext
 
     private lateinit var objectMapper: ObjectMapper
 
@@ -42,15 +37,17 @@ class WebSocketService : ApplicationContextAware {
     private val virtualThreadExecutor = Executors.newVirtualThreadPerTaskExecutor()
 
     override fun setApplicationContext(applicationContext: ApplicationContext) {
-        APPLICATION_CONTEXT = applicationContext
+        this.applicationContext = applicationContext
     }
 
     /**
      * 初始化
+     *
+     * [springdoc.cn](https://springdoc.cn/spring-boot-websocket)
      */
     private fun init() {
-        this.objectMapper = APPLICATION_CONTEXT.getBean(ObjectMapper::class.java)
-        this.kSqlClient = APPLICATION_CONTEXT.getBean(KSqlClient::class.java)
+        this.objectMapper = applicationContext.getBean(ObjectMapper::class.java)
+        this.kSqlClient = applicationContext.getBean(KSqlClient::class.java)
     }
 
     @OnOpen
@@ -63,6 +60,16 @@ class WebSocketService : ApplicationContextAware {
                 sendMessage(session)
                 Thread.sleep(2000)
             }
+        }
+    }
+
+    @OnMessage
+    fun onMessage(message: String, session: Session) {
+        if (message.isBlank() && message.startsWith("Authorization:").not()) {
+            isVisitor.set(false)
+        } else {
+            isVisitor.set(true)
+            TODO("待实现 token 验证")
         }
     }
 
@@ -86,9 +93,9 @@ class WebSocketService : ApplicationContextAware {
         }
         try {
             val state = kSqlClient.createQuery(ServerState::class) {
-                // 当前时间戳（秒） 4 秒钟前
-//                val twoSecondsAgo = (System.currentTimeMillis() / 1000) - 4
-//                where(table.uploadTime gt twoSecondsAgo)
+                // 当前时间戳 3 秒钟前
+                val threeSecondsAgo = System.currentTimeMillis().div(1000).minus(3)
+                where(table.uploadTime gt threeSecondsAgo)
                 orderBy(table.uploadTime.desc())
                 select(table.fetch(ServerStateSocketView::class))
             }.execute().distinctBy { it.serverMonitorId }
@@ -140,12 +147,11 @@ class WebSocketService : ApplicationContextAware {
     }
 
     private fun webSocketClose(session: Session) {
+        if (virtualThreadExecutor.isShutdown.not()) {
+            virtualThreadExecutor.shutdownNow()
+        }
         if (session.isOpen) {
             session.close()
         }
-        if (virtualThreadExecutor.isShutdown) {
-            virtualThreadExecutor.shutdownNow()
-        }
     }
-
 }
