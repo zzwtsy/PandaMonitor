@@ -6,7 +6,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
 // Pass { disableTransition: false } to enable transitions
@@ -27,9 +27,15 @@ const mode = useColorMode()
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end">
-      <DropdownMenuItem @click="mode = 'light'"> Light </DropdownMenuItem>
-      <DropdownMenuItem @click="mode = 'dark'"> Dark </DropdownMenuItem>
-      <DropdownMenuItem @click="mode = 'auto'"> System </DropdownMenuItem>
+      <DropdownMenuItem @click="mode = 'light'">
+        Light
+      </DropdownMenuItem>
+      <DropdownMenuItem @click="mode = 'dark'">
+        Dark
+      </DropdownMenuItem>
+      <DropdownMenuItem @click="mode = 'auto'">
+        System
+      </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
 </template>

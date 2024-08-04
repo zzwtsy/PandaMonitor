@@ -1,12 +1,12 @@
 import type { Dynamic_ServerHost, Dynamic_ServerState } from '@/__generated/model/dynamic'
 
-export type WebSocketDTO = {
+export interface WebSocketDTO {
   readonly id: number
   readonly groupName: string
   readonly serverMonitor: ServerMonitorDTO[]
 }
 
-export type ServerMonitorDTO = {
+export interface ServerMonitorDTO {
   readonly id: number
   readonly sortId: number
   readonly serverName: string
@@ -14,7 +14,7 @@ export type ServerMonitorDTO = {
   readonly serverState: Dynamic_ServerState | null
 }
 
-export type UserInfo = {
+export interface UserInfo {
   userId: number
   userName: string
   token: string

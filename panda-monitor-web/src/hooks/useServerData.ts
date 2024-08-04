@@ -1,10 +1,10 @@
-import { ref, computed, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { useLocalStorage, useWebSocket } from '@vueuse/core'
 import { toast } from 'vue-sonner'
 import type { Result } from '@/__generated/model/static'
 import type { UserInfo, WebSocketDTO } from '@/types'
 
-type ServerGroupItem = {
+interface ServerGroupItem {
   readonly id: number
   readonly groupName: string
 }
@@ -21,7 +21,7 @@ export function useServerData() {
     },
     onError() {
       toast.error('连接服务器失败')
-    }
+    },
   })
 
   const parseWebSocketData = (value: string) => {
@@ -32,7 +32,8 @@ export function useServerData() {
         return null
       }
       return webSocketDTO.data
-    } catch (error) {
+    }
+    catch (error) {
       console.error('解析WebSocket数据时出错:', error)
       toast.error('连接服务器失败')
       return null
@@ -41,9 +42,11 @@ export function useServerData() {
 
   // 获取服务器分组
   const serverGroupList = computed(() => {
-    if (!data.value) return []
+    if (!data.value)
+      return []
     const parsedData = parseWebSocketData(data.value)
-    if (!parsedData) return []
+    if (!parsedData)
+      return []
     return parsedData.map((item) => {
       return { id: item.id, groupName: item.groupName } as ServerGroupItem
     })
@@ -51,13 +54,15 @@ export function useServerData() {
 
   // 计算服务器数据
   const serverData = computed(() => {
-    if (!data.value) return []
+    if (!data.value)
+      return []
 
     const parsedData = parseWebSocketData(data.value)
-    if (!parsedData) return []
+    if (!parsedData)
+      return []
 
     const serverMonitor = parsedData
-      .find((item) => item.groupName === serverGroupName.value)
+      .find(item => item.groupName === serverGroupName.value)
       ?.serverMonitor.sort((a, b) => a.sortId - b.sortId)
 
     if (!serverMonitor || serverMonitor === void 0) {
@@ -73,7 +78,7 @@ export function useServerData() {
     get: () => serverGroupName.value,
     set: (newValue) => {
       serverGroupName.value = newValue
-    }
+    },
   })
 
   // 当serverGroupList变化时，设置默认值
@@ -87,6 +92,6 @@ export function useServerData() {
     serverGroupName: initializedServerGroupName,
     data,
     serverGroupList,
-    serverData
+    serverData,
   }
 }

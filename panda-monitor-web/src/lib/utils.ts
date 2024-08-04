@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { calc } from 'a-calc'
 import dayjs from 'dayjs'
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -21,11 +22,12 @@ export function calcUsage(total: string, used: string): number {
  * @param {string} bytes 字节
  */
 export function formatBytes(bytes: string): string {
-  if (bytes === '0') return '0 Bytes'
+  if (bytes === '0')
+    return '0 Bytes'
   const k = 1024
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-  const i = Math.floor(Math.log(parseInt(bytes)) / Math.log(k))
-  return calc('bytes / k ** i | =0', { bytes, k, i }) + ' ' + sizes[i]
+  const i = Math.floor(Math.log(Number.parseInt(bytes)) / Math.log(k))
+  return `${calc('bytes / k ** i | =0', { bytes, k, i })} ${sizes[i]}`
 }
 
 /**
@@ -41,9 +43,11 @@ export function calcServerTime(bootTime: number): string {
   const minutes = calc('(diff % 3600) / 60 | =0%!n', { diff })
   if (days > 0) {
     return `${days} 天 ${hours} 时 ${minutes} 分`
-  } else if (hours > 0) {
+  }
+  else if (hours > 0) {
     return `${hours} 时 ${minutes} 分`
-  } else {
+  }
+  else {
     return `${minutes} 分`
   }
 }

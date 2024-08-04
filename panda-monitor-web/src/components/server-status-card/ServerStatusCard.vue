@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   ActivityIcon,
   ArrowUpDownIcon,
@@ -12,17 +11,18 @@ import {
   MemoryStickIcon,
   ReplaceIcon,
   ServerCrashIcon,
-  ServerIcon
+  ServerIcon,
 } from 'lucide-vue-next'
-import ServerStatusProgress from './ServerStatusProgress.vue'
 import { onMounted, ref } from 'vue'
+import ServerStatusProgress from './ServerStatusProgress.vue'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import type { ServerMonitorDTO } from '@/types'
 import { cn } from '@/lib/utils'
 import ServerStatusItem from '@/components/server-status-card/ServerStatusItem.vue'
 import { useServerMonitorState } from '@/hooks/useServerMonitorState'
 
-type Props = {
+interface Props {
   serverMonitor: ServerMonitorDTO
 }
 
@@ -34,7 +34,8 @@ const cardTitleIsOverflowed = ref(false)
 // 监听标题是否溢出
 onMounted(() => {
   const element = cardTitleRef.value
-  if (!element) return
+  if (!element)
+    return
   cardTitleIsOverflowed.value = element.scrollWidth > element.offsetWidth
 })
 
@@ -49,7 +50,7 @@ const state = useServerMonitorState(props.serverMonitor)
           <TooltipProvider
             :disabled="!cardTitleIsOverflowed"
             :delay-duration="300"
-            :disableClosingTrigger="true"
+            :disable-closing-trigger="true"
             :ignore-non-keyboard-focus="true"
           >
             <Tooltip>

@@ -1,9 +1,9 @@
-import { calcServerTime, calcUsage, formatBytes } from '@/lib/utils'
-import type { ServerMonitorDTO } from '@/types'
 import { calc } from 'a-calc'
 import { computed } from 'vue'
+import { calcServerTime, calcUsage, formatBytes } from '@/lib/utils'
+import type { ServerMonitorDTO } from '@/types'
 
-type State = {
+interface State {
   cpuUsage: number
   memoryUsage: number
   diskUsage: number
@@ -25,7 +25,7 @@ export function useServerMonitorState(props: ServerMonitorDTO): State {
     netOutTransfer: '0',
     netInSpeed: '0',
     netOutSpeed: '0',
-    uptime: '0'
+    uptime: '0',
   })
 
   const state = computed(() => {
@@ -44,7 +44,7 @@ export function useServerMonitorState(props: ServerMonitorDTO): State {
       netOutTransfer: formatBytes(serverState.netOutTransfer ?? '0'),
       netInSpeed: formatBytes(serverState.netInSpeed ?? '0'),
       netOutSpeed: formatBytes(serverState.netOutSpeed ?? '0'),
-      uptime: calcServerTime(serverHost?.bootTime ?? 0)
+      uptime: calcServerTime(serverHost?.bootTime ?? 0),
     }
     return result
   })

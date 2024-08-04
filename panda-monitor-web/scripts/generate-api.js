@@ -1,20 +1,18 @@
+import http from 'node:http'
+import fs from 'node:fs'
 import tempDir from 'temp-dir'
 
 import AdmZip from 'adm-zip'
 
 import { v4 as uuid } from 'uuid'
 
-import http from 'http'
-
-import fs from 'fs'
-
 import fse from 'fs-extra'
 
 const sourceUrl = 'http://localhost:8080/ts.zip'
-const tmpFilePath = tempDir + '/' + uuid() + '.zip'
+const tmpFilePath = `${tempDir}/${uuid()}.zip`
 const generatePath = 'src/__generated'
 
-console.log('Downloading ' + sourceUrl + '...')
+console.log(`Downloading ${sourceUrl}...`)
 
 const tmpFile = fs.createWriteStream(tmpFilePath)
 
@@ -42,7 +40,8 @@ const request = http.get(sourceUrl, (response) => {
     fs.unlink(tmpFilePath, (err) => {
       if (err) {
         console.error('Error while removing temporary file:', err)
-      } else {
+      }
+      else {
         console.log('Temporary file removed.')
       }
     })

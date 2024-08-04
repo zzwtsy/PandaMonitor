@@ -4,7 +4,7 @@ import { ProgressIndicator, ProgressRoot, type ProgressRootProps } from 'radix-v
 import { cn } from '@/lib/utils'
 
 const props = withDefaults(defineProps<ProgressRootProps & { class?: HTMLAttributes['class'] }>(), {
-  modelValue: 0
+  modelValue: 0,
 })
 
 const delegatedProps = computed(() => {
@@ -13,13 +13,15 @@ const delegatedProps = computed(() => {
   return { delegated }
 })
 
-const progressIndicatorColor = () => {
+function progressIndicatorColor() {
   const progressValue = props.modelValue ?? 0
   if (progressValue >= 86 && progressValue <= 100) {
     return 'bg-error'
-  } else if (progressValue >= 51 && progressValue <= 85) {
+  }
+  else if (progressValue >= 51 && progressValue <= 85) {
     return 'bg-warning'
-  } else if (progressValue >= 0 && progressValue <= 50) {
+  }
+  else if (progressValue >= 0 && progressValue <= 50) {
     return 'bg-success'
   }
   return 'bg-primary'

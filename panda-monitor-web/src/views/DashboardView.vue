@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { WifiOffIcon } from 'lucide-vue-next'
 import { ServerStatusCard } from '@/components/server-status-card'
 import {
   Select,
@@ -6,9 +7,8 @@ import {
   SelectGroup,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select'
-import { WifiOffIcon } from 'lucide-vue-next'
 import { useServerData } from '@/hooks/useServerData'
 
 const { serverData, serverGroupList, serverGroupName } = useServerData()
@@ -36,7 +36,7 @@ const { serverData, serverGroupList, serverGroupName } = useServerData()
     <ServerStatusCard
       v-for="serverMonitor in serverData"
       :key="serverMonitor.sortId"
-      :serverMonitor="serverMonitor"
+      :server-monitor="serverMonitor"
     />
   </div>
   <!-- 如果果没有服务器数据，则显示暂无可监控的服务器，并添加淡入淡出效果 -->
@@ -45,7 +45,9 @@ const { serverData, serverGroupList, serverGroupName } = useServerData()
     class="absolute top-1/2 left-1/2 translate-x-[-50%] flex flex-col items-center justify-center"
   >
     <WifiOffIcon class="w-8 h-8" />
-    <h1 class="text-xl mt-3">暂无可监控的服务器</h1>
+    <h1 class="text-xl mt-3">
+      暂无可监控的服务器
+    </h1>
   </div>
 </template>
 
