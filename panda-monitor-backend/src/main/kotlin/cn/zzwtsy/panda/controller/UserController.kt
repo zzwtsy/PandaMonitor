@@ -80,7 +80,13 @@ class UserController(private val kSqlClient: KSqlClient) {
 
         val result = kSqlClient.save(input)
         if (result.isModified.not()) {
-            log.warn("添加用户失败：originalEntity=${result.originalEntity}\nmodifiedEntity=${result.modifiedEntity}")
+            log.warn(
+                """
+                添加用户失败：
+                originalEntity=${result.originalEntity}
+                modifiedEntity=${result.modifiedEntity}
+                """.trimMargin()
+            )
             return Result.error(400, "添加用户失败")
         }
         return Result.success(UserView(result.modifiedEntity))
