@@ -13,3 +13,9 @@ export type ServerMonitorDTO = {
   readonly serverHost: Dynamic_ServerHost | null
   readonly serverState: Dynamic_ServerState | null
 }
+
+export type UserInfo = {
+  userId: number
+  userName: string
+  token: string
+}
