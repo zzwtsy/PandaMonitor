@@ -1,25 +1,15 @@
 spring:
+  profiles:
+    active: dev
   threads:
     virtual:
       enabled: true
   application:
     name: PandaMonitorBackend
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.2.142:3306/servermonitor
-    username: servermonitor
-    password: PYabaeHmjyYQfcNT
+config:
+  db-url: ${DB_URL}
+  db-username: ${DB_USERNAME}
+  db-password: ${DB_PASSWORD}
 
 jimmer:
   language: kotlin
-  client:
-    ts:
-      path: /ts.zip
-    openapi:
-      path: /api/openapi.yml
-      ui-path: /api/openapi.html
-      properties:
-        info:
-          title: Panda Monitor
-          version: 1.0.0
-          description: Panda Monitor API
