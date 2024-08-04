@@ -41,7 +41,7 @@ interface ServerHost {
     val osVersion: String
 
     /**
-     * 操作系统版本(长)
+     * 操作系统发行版 id
      */
     @Column(name = "distribution_id")
     val distributionId: String
