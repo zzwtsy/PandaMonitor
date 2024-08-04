@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
-    <list size="10">
+    <list size="11">
       <item index="0" class="java.lang.String" itemvalue="jakarta.websocket.OnClose" />
       <item index="1" class="java.lang.String" itemvalue="jakarta.websocket.OnError" />
-      <item index="2" class="java.lang.String" itemvalue="jakarta.websocket.OnOpen" />
-      <item index="3" class="java.lang.String" itemvalue="jakarta.websocket.server.ServerEndpoint" />
-      <item index="4" class="java.lang.String" itemvalue="org.babyfish.jimmer.sql.Column" />
-      <item index="5" class="java.lang.String" itemvalue="org.babyfish.jimmer.sql.Entity" />
-      <item index="6" class="java.lang.String" itemvalue="org.babyfish.jimmer.sql.IdView" />
-      <item index="7" class="java.lang.String" itemvalue="org.babyfish.jimmer.sql.JoinColumn" />
-      <item index="8" class="java.lang.String" itemvalue="org.babyfish.jimmer.sql.OneToMany" />
-      <item index="9" class="java.lang.String" itemvalue="org.springframework.beans.factory.annotation.Configurable" />
+      <item index="2" class="java.lang.String" itemvalue="jakarta.websocket.OnMessage" />
+      <item index="3" class="java.lang.String" itemvalue="jakarta.websocket.OnOpen" />
+      <item index="4" class="java.lang.String" itemvalue="jakarta.websocket.server.ServerEndpoint" />
+      <item index="5" class="java.lang.String" itemvalue="org.babyfish.jimmer.sql.Column" />
+      <item index="6" class="java.lang.String" itemvalue="org.babyfish.jimmer.sql.Entity" />
+      <item index="7" class="java.lang.String" itemvalue="org.babyfish.jimmer.sql.IdView" />
+      <item index="8" class="java.lang.String" itemvalue="org.babyfish.jimmer.sql.JoinColumn" />
+      <item index="9" class="java.lang.String" itemvalue="org.babyfish.jimmer.sql.OneToMany" />
+      <item index="10" class="java.lang.String" itemvalue="org.springframework.beans.factory.annotation.Configurable" />
     </list>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
