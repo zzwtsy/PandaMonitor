@@ -1,14 +1,20 @@
 import { ref, computed, watchEffect } from 'vue'
-import { useWebSocket } from '@vueuse/core'
+import { useLocalStorage, useWebSocket } from '@vueuse/core'
 import { toast } from 'vue-sonner'
 import type { Result } from '@/__generated/model/static'
-import type { WebSocketDTO } from '@/types'
+import type { UserInfo, WebSocketDTO } from '@/types'
+
+type ServerGroupItem = {
+  readonly id: number
+  readonly groupName: string
+}
 
 export function useServerData() {
   const serverGroupName = ref('')
+  const userInfo = useLocalStorage<UserInfo>('userInfo', null)
   const { data } = useWebSocket<string>('ws://localhost:8080/api/ws', {
     onConnected(ws) {
-      ws.send(`Authorization: Bearer ${localStorage.getItem('token')}`)
+      ws.send(`Authorization: Bearer ${userInfo.value.token}`)
       if (ws.readyState === WebSocket.OPEN) {
         toast.success('连接服务器成功')
       }
@@ -38,7 +44,9 @@ export function useServerData() {
     if (!data.value) return []
     const parsedData = parseWebSocketData(data.value)
     if (!parsedData) return []
-    return parsedData.map((item) => item.groupName)
+    return parsedData.map((item) => {
+      return { id: item.id, groupName: item.groupName } as ServerGroupItem
+    })
   })
 
   // 计算服务器数据
@@ -71,7 +79,7 @@ export function useServerData() {
   // 当serverGroupList变化时，设置默认值
   watchEffect(() => {
     if (serverGroupList.value.length > 0 && !initializedServerGroupName.value) {
-      initializedServerGroupName.value = serverGroupList.value[0]
+      initializedServerGroupName.value = serverGroupList.value[0].groupName
     }
   })
 
