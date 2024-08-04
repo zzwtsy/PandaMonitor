@@ -26,7 +26,7 @@ const { serverData, serverGroupList, serverGroupName } = useServerData()
     </SelectTrigger>
     <SelectContent>
       <SelectGroup>
-        <SelectItem v-for="(item, index) in serverGroupList" :key="index" :value="item">
+        <SelectItem v-for="item in serverGroupList" :key="item.id" :value="item.groupName">
           {{ item }}
         </SelectItem>
       </SelectGroup>
@@ -34,8 +34,8 @@ const { serverData, serverGroupList, serverGroupName } = useServerData()
   </Select>
   <div class="grid gap-4 mt-2 w-full lg:grid-cols-2 xl:grid-cols-3">
     <ServerStatusCard
-      v-for="(serverMonitor, index) in serverData"
-      :key="index"
+      v-for="serverMonitor in serverData"
+      :key="serverMonitor.sortId"
       :serverMonitor="serverMonitor"
     />
   </div>
